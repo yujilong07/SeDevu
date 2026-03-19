@@ -3,5 +3,6 @@ from app.models.topic import Topic
 from app.models.streak import Streak
 from app.models.progress import Progress
 from app.models.note import Note
+from app.models.token_blocklist import Token_BL
 
 
