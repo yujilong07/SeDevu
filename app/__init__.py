@@ -33,6 +33,9 @@ def create_app():
     from app.routes.progress import prog_bp
     app.register_blueprint(prog_bp)
 
+    from app.routes.stats import stat_bp
+    app.register_blueprint(stat_bp)
+
     migrate = Migrate(app, db)
     
     bcrypt.init_app(app)
