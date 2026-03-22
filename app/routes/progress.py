@@ -3,8 +3,9 @@ from app import db
 from app.models.topic import Topic
 from app.models.progress import Progress
 from app.models.user import User
+from app.models.streak import Streak
 from flask_jwt_extended import jwt_required, get_jwt_identity
-
+from datetime import date
 
 prog_bp = Blueprint('progress', __name__)
 
@@ -28,6 +29,29 @@ def write_progress(topic_id):
     new_log = Progress(user_id=user.pid, topic_id=topic_id, note=note)
         
     db.session.add(new_log)
+    db.session.commit()
+
+    streak = Streak.query.filter_by(user_id=user.pid).first()
+    today = date.today()
+
+    if streak is None:
+        new_streak = Streak(user_id=user.pid, current_streak=1, 
+                        longest_streak=1, last_activity_date=today)
+        db.session.add(new_streak)
+    else:
+        diff = (today - streak.last_activity_date.date()).days
+        if diff == 0:
+            pass  
+        elif diff == 1:
+            streak.current_streak += 1 
+        else:
+            streak.current_streak = 1 
+        
+        if streak.current_streak > streak.longest_streak:
+            streak.longest_streak = streak.current_streak
+        
+        streak.last_activity_date = today
+
     db.session.commit()
 
     return jsonify({"message": "Log created successfully"}), 201
