@@ -56,7 +56,6 @@ def login():
                 return jsonify({"msg": "Original Password is not matching with yours, try again "}), 401
 
         else:
-        
                 access_token = create_access_token(identity=email)
 
                 return jsonify(access_token=access_token)
@@ -70,9 +69,3 @@ def modify_token():
     db.session.add(Token_BL(jti=jti, created_at=now))
     db.session.commit()
     return jsonify(msg="JWT revoked")
-
-                        
-
-
-        
-

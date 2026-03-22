@@ -27,6 +27,9 @@ def create_app():
     from app.routes.auth import auth_bp
     app.register_blueprint(auth_bp)
 
+    from app.routes.topics import topic_bp
+    app.register_blueprint(topic_bp)
+
     migrate = Migrate(app, db)
     
     bcrypt.init_app(app)
