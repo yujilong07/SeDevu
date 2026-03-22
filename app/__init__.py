@@ -30,6 +30,9 @@ def create_app():
     from app.routes.topics import topic_bp
     app.register_blueprint(topic_bp)
 
+    from app.routes.progress import prog_bp
+    app.register_blueprint(prog_bp)
+
     migrate = Migrate(app, db)
     
     bcrypt.init_app(app)

@@ -3,9 +3,6 @@ from app import db
 from app.models.user import User
 from app.models.topic import Topic
 from flask_jwt_extended import jwt_required, get_jwt_identity
-from datetime import timezone, datetime
-
-
 
 topic_bp = Blueprint('topic', __name__)
 
@@ -69,10 +66,10 @@ def update_topic(id):
        email = get_jwt_identity()
        user = User.query.filter_by(email=email).first()
        if not user:
-              return jsonify({"Error": "You cannot access topics if you are not registered"})
+              return jsonify({"Error": "You cannot access topics if you are not registered"}), 400
        topic = Topic.query.filter_by(id=id, user_id=user.pid).first()
        if not topic:
-                return jsonify({"Error": "You cannot update topic if there were not before it"})
+                return jsonify({"Error": "You cannot update topic if there were not before it"}),400
 
        if new_title is not None:
                 topic.title = new_title
@@ -90,10 +87,10 @@ def delete_topic(id):
        email = get_jwt_identity()
        user = User.query.filter_by(email=email).first()
        if not user:
-              return jsonify({"Error": "You cannot access topics if you are not registered"})
+              return jsonify({"Error": "You cannot access topics if you are not registered"}), 400
        topic = Topic.query.filter_by(id=id, user_id=user.pid).first()
        if not topic:
-                return jsonify({"Error": "You cannot delete topic if there were not before it"})
+                return jsonify({"Error": "You cannot delete topic if there were not before it"}), 400
        
        db.session.delete(topic)
        db.session.commit()
