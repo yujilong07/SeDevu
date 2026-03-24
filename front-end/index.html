@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>DevTracker</title>
+  <link rel="stylesheet" href="style.css"/>
+  <style>
+    .hero {
+      position: relative; z-index: 1;
+      min-height: 100vh;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      text-align: center; padding: 8rem 2rem 4rem;
+    }
+    .hero-badge {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.72rem; letter-spacing: 0.15em; color: var(--accent);
+      border: 1px solid rgba(0,255,136,0.3); background: rgba(0,255,136,0.06);
+      padding: 0.35rem 1rem; border-radius: 2px; margin-bottom: 2rem;
+      animation: fadeUp 0.6s ease both, badgePulse 3s ease-in-out 1s infinite;
+    }
+    @keyframes badgePulse { 0%,100% { box-shadow: 0 0 0 0 rgba(0,255,136,0); } 50% { box-shadow: 0 0 14px 3px rgba(0,255,136,0.1); } }
+    .hero h1 {
+      font-size: clamp(2.8rem, 7vw, 5.5rem); font-weight: 800;
+      line-height: 1.05; letter-spacing: -0.03em; margin-bottom: 1.5rem;
+      animation: fadeUp 0.6s 0.1s ease both;
+    }
+    .hero h1 .hl {
+      background: linear-gradient(90deg, var(--accent), var(--accent2), var(--accent));
+      background-size: 200% auto;
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      animation: gradShift 4s linear infinite;
+    }
+    @keyframes gradShift { to { background-position: 200% center; } }
+    .hero p { font-size: 1.15rem; color: var(--muted); max-width: 520px; line-height: 1.7; margin-bottom: 2.5rem; animation: fadeUp 0.6s 0.2s ease both; }
+    .hero-cta { display: flex; gap: 1rem; animation: fadeUp 0.6s 0.3s ease both; }
+    .stats-bar { position: relative; z-index: 1; display: flex; justify-content: center; padding: 3rem 2rem; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); background: rgba(19,19,26,0.6); }
+    .stat-item { text-align: center; padding: 0 3rem; border-right: 1px solid var(--border); }
+    .stat-item:last-child { border-right: none; }
+    .stat-number { font-family: 'JetBrains Mono', monospace; font-size: 2.2rem; font-weight: 700; color: var(--accent); display: block; }
+    .stat-lbl { font-size: 0.78rem; color: var(--muted); letter-spacing: 0.08em; text-transform: uppercase; }
+    .features { position: relative; z-index: 1; padding: 6rem 2rem; max-width: 1100px; margin: 0 auto; }
+    .section-label { font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; letter-spacing: 0.15em; color: var(--accent2); text-transform: uppercase; margin-bottom: 1rem; }
+    .section-title { font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 800; letter-spacing: -0.02em; margin-bottom: 3.5rem; max-width: 500px; }
+    .features-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5px; background: var(--border); border: 1px solid var(--border); }
+    @media (max-width: 860px) { .features-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 560px) { .features-grid { grid-template-columns: 1fr; } }
+    .feature-card { background: var(--surface); padding: 2rem; transition: background 0.2s; }
+    .feature-card:hover { background: #16161f; }
+    .feature-icon { font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; color: var(--accent); background: rgba(0,255,136,0.08); border: 1px solid rgba(0,255,136,0.2); display: inline-block; padding: 0.3rem 0.6rem; border-radius: 2px; margin-bottom: 1.2rem; }
+    .feature-card h3 { font-size: 1.05rem; font-weight: 700; margin-bottom: 0.6rem; }
+    .feature-card p { font-size: 0.88rem; color: var(--muted); line-height: 1.65; }
+    .preview { position: relative; z-index: 1; padding: 4rem 2rem 6rem; max-width: 780px; margin: 0 auto; }
+    .terminal { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; box-shadow: 0 40px 80px rgba(0,0,0,0.6), 0 0 80px rgba(0,255,136,0.04), inset 0 1px 0 rgba(255,255,255,0.03); }
+    .terminal-bar { background: #1a1a24; padding: 0.75rem 1rem; display: flex; align-items: center; gap: 0.5rem; border-bottom: 1px solid var(--border); }
+    .dot { width: 12px; height: 12px; border-radius: 50%; }
+    .dot-r { background: #ff5f57; } .dot-y { background: #febc2e; } .dot-g { background: #28c840; }
+    .terminal-ttl { font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; color: var(--muted); margin: 0 auto; }
+    .terminal-body { padding: 1.5rem; font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; line-height: 2; }
+    .t-muted { color: var(--muted); } .t-green { color: var(--accent); } .t-blue { color: var(--accent2); }
+    .cta-bottom { position: relative; z-index: 1; text-align: center; padding: 5rem 2rem 6rem; border-top: 1px solid var(--border); overflow: hidden; }
+    .cta-bottom::before { content: ''; position: absolute; inset: 0; z-index: 0; background-image: radial-gradient(rgba(0,255,136,0.07) 1px, transparent 1px); background-size: 28px 28px; pointer-events: none; }
+    .cta-bottom > * { position: relative; z-index: 1; }
+    .cta-bottom h2 { font-size: clamp(1.8rem, 4vw, 3rem); font-weight: 800; letter-spacing: -0.02em; margin-bottom: 1rem; }
+    .cta-bottom p { color: var(--muted); margin-bottom: 2rem; }
+
+    /* ── SCROLL PROGRESS BAR ── */
+    #scroll-progress { position: fixed; top: 0; left: 0; height: 2px; z-index: 999; background: linear-gradient(90deg, var(--accent), var(--accent2)); width: 0%; box-shadow: 0 0 10px rgba(0,255,136,0.6); pointer-events: none; }
+
+    /* ── BUTTON SHIMMER ── */
+    .btn-primary { position: relative; overflow: hidden; }
+    .btn-primary::after { content: ''; position: absolute; top: 0; left: -100%; width: 50%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.18), transparent); transform: skewX(-20deg); transition: left 0.6s ease; }
+    .btn-primary:hover::after { left: 160%; }
+
+    /* ── HERO FLOATING CODE DECO ── */
+    .hero-deco { position: absolute; inset: 0; pointer-events: none; overflow: hidden; z-index: 0; }
+    .deco-code { position: absolute; font-family: 'JetBrains Mono', monospace; font-size: 0.68rem; color: var(--accent); opacity: 0.15; white-space: nowrap; animation: decoFloat ease-in-out infinite; user-select: none; }
+    @keyframes decoFloat { 0%,100% { transform: translateY(0); opacity: 0.15; } 50% { transform: translateY(-12px); opacity: 0.32; } }
+
+    /* ── STAT NUMBER GLOW ── */
+    .stat-number { text-shadow: 0 0 24px rgba(0,255,136,0.4); }
+
+    /* ── TERMINAL TYPEWRITER ── */
+    .t-line { opacity: 0; transform: translateX(-6px); transition: opacity 0.25s ease, transform 0.25s ease; }
+    .t-line.typed { opacity: 1; transform: none; }
+
+    /* ── HOW IT WORKS ── */
+    .how-it-works { position: relative; z-index: 1; padding: 5rem 2rem; max-width: 1100px; margin: 0 auto; border-top: 1px solid var(--border); }
+    .hiw-steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5px; background: var(--border); border: 1px solid var(--border); margin-top: 3rem; }
+    .hiw-step { background: var(--surface); padding: 2rem; transition: background 0.2s; }
+    .hiw-step:hover { background: #15151f; }
+    .hiw-num { font-family: 'JetBrains Mono', monospace; font-size: 0.68rem; color: var(--accent); border: 1px solid rgba(0,255,136,0.25); background: rgba(0,255,136,0.05); display: inline-block; padding: 0.2rem 0.6rem; border-radius: 2px; margin-bottom: 1.1rem; letter-spacing: 0.1em; }
+    .hiw-step h3 { font-size: 1.05rem; font-weight: 700; margin-bottom: 0.6rem; }
+    .hiw-step p { font-size: 0.85rem; color: var(--muted); line-height: 1.65; margin-bottom: 1.2rem; }
+    .hiw-example { font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; padding: 0.9rem 1rem; background: var(--bg); border: 1px solid var(--border); border-radius: 4px; line-height: 2; color: var(--muted); }
+    .hiw-example .hl-g { color: var(--accent); } .hiw-example .hl-b { color: var(--accent2); } .hiw-example .hl-w { color: var(--warn); }
+
+    /* ── FEATURE LIST ── */
+    .feature-list { margin-top: 1rem; padding: 0; list-style: none; border-top: 1px solid var(--border); padding-top: 0.9rem; }
+    .feature-list li { font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: var(--muted); line-height: 1.8; padding-left: 1.2rem; position: relative; }
+    .feature-list li::before { content: '→'; position: absolute; left: 0; color: var(--accent); }
+
+    /* ── STAT ITEM REDESIGN ── */
+    .stat-name { font-size: 0.9rem; font-weight: 700; color: var(--text); display: block; margin: 0.25rem 0 0.15rem; letter-spacing: -0.01em; }
+  </style>
+</head>
+<body>
+
+<div id="scroll-progress"></div>
+<div class="bg-orb bg-orb-1"></div>
+<div class="bg-orb bg-orb-2"></div>
+
+<nav>
+  <a class="nav-logo" href="#"><span>></span> DevTracker</a>
+  <div class="nav-actions">
+    <button class="btn btn-ghost" onclick="openModal('login')">Логін</button>
+    <button class="btn btn-primary" onclick="openModal('register')">Реєстрація</button>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hero-deco" aria-hidden="true">
+    <span class="deco-code" style="top:18%;left:6%;animation-duration:7s">git commit -m "day 14"</span>
+    <span class="deco-code" style="top:30%;right:7%;animation-duration:9s;animation-delay:-3s">const streak = 14</span>
+    <span class="deco-code" style="bottom:32%;left:5%;animation-duration:8s;animation-delay:-5s">topics.push({ title, priority })</span>
+    <span class="deco-code" style="top:65%;right:6%;animation-duration:10s;animation-delay:-1s;color:var(--accent2)">GET /show_stats → 200 OK</span>
+    <span class="deco-code" style="bottom:18%;left:12%;animation-duration:6s;animation-delay:-4s;color:var(--accent2)">// keep learning 🚀</span>
+  </div>
+  <div class="hero-badge">// track your dev journey</div>
+  <h1>Відстежуй своє<br/><span class="hl">навчання</span></h1>
+  <p>Ведіть щоденник навчання як розробник. Додавайте теми з пріоритетами, щодня фіксуйте що вивчили, підтримуйте streak і дивіться статистику свого зростання.</p>
+  <div class="hero-cta">
+    <button class="btn btn-primary btn-lg" onclick="openModal('register')">Почати безкоштовно</button>
+    <button class="btn btn-ghost btn-lg" onclick="openModal('login')">Увійти</button>
+  </div>
+</section>
+
+<div class="stats-bar reveal">
+  <div class="stat-item">
+    <span class="stat-number">∞</span>
+    <span class="stat-name">Теми</span>
+    <span class="stat-lbl">пріоритети P1–P5</span>
+  </div>
+  <div class="stat-item">
+    <span class="stat-number" style="font-size:1.5rem">📝</span>
+    <span class="stat-name">Прогрес</span>
+    <span class="stat-lbl">журнал по кожній темі</span>
+  </div>
+  <div class="stat-item">
+    <span class="stat-number" style="font-size:1.5rem">🔥</span>
+    <span class="stat-name">Streak</span>
+    <span class="stat-lbl">серія активних днів</span>
+  </div>
+  <div class="stat-item">
+    <span class="stat-number" style="font-size:1.5rem">📊</span>
+    <span class="stat-name">Статистика</span>
+    <span class="stat-lbl">графіки і показники</span>
+  </div>
+</div>
+
+<section class="how-it-works">
+  <div class="section-label reveal">// як це працює</div>
+  <h2 class="section-title reveal" style="transition-delay:0.1s">Три кроки до прогресу</h2>
+  <div class="hiw-steps">
+    <div class="hiw-step reveal" style="transition-delay:0.05s">
+      <div class="hiw-num">step 01</div>
+      <h3>Додай тему</h3>
+      <p>Створи тему яку хочеш вивчити та встанови пріоритет — від P1 (критично) до P5 (колись).</p>
+      <div class="hiw-example">
+        <span class="hl-g">P1</span> React Hooks<br/>
+        <span class="hl-b">P2</span> Docker Compose<br/>
+        <span class="hl-w">P3</span> SQL joins<br/>
+        <span style="color:var(--border)">P4</span> WebSockets
+      </div>
+    </div>
+    <div class="hiw-step reveal" style="transition-delay:0.15s">
+      <div class="hiw-num">step 02</div>
+      <h3>Фіксуй що зробив</h3>
+      <p>Щодня записуй прогрес по темі — що вивчив, написав, розібрав. Повна хронологія як git log.</p>
+      <div class="hiw-example">
+        <span class="hl-b">2024-01-15</span> <span class="hl-g">React Hooks</span><br/>
+        Вивчив useState, useEffect.<br/>
+        Написав 3 компоненти.<br/>
+        <span class="hl-b">2024-01-16</span> <span class="hl-g">React Hooks</span><br/>
+        Розібрав useContext...
+      </div>
+    </div>
+    <div class="hiw-step reveal" style="transition-delay:0.25s">
+      <div class="hiw-num">step 03</div>
+      <h3>Не переривай серію</h3>
+      <p>Кожен день з активністю збільшує твій streak. Dashboard показує поточну серію і рекорд.</p>
+      <div class="hiw-example" style="text-align:center;padding:1.2rem">
+        <span class="hl-w" style="font-size:2rem;display:block">🔥 14</span>
+        <span>// поточний streak</span><br/>
+        <span class="hl-g">рекорд: 21 день</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="features">
+  <div class="section-label reveal">// можливості</div>
+  <h2 class="section-title reveal" style="transition-delay:0.1s">Все що потрібно для росту</h2>
+  <div class="features-grid">
+    <div class="feature-card reveal" style="transition-delay:0.05s">
+      <span class="feature-icon">01 // topics</span>
+      <h3>Трекер тем</h3>
+      <p>Організуй все що хочеш вивчити в одному місці. Від ідеї до завершення.</p>
+      <ul class="feature-list">
+        <li>Пріоритети P1–P5 (від критичного до "колись")</li>
+        <li>Статуси: не почато → в процесі → завершено</li>
+        <li>Фільтрація по статусу</li>
+        <li>Редагування і видалення тем</li>
+      </ul>
+    </div>
+    <div class="feature-card reveal" style="transition-delay:0.15s">
+      <span class="feature-icon">02 // progress</span>
+      <h3>Журнал прогресу</h3>
+      <p>По кожній темі — хронологічний лог того що ти зробив. Як git commits, але для навчання.</p>
+      <ul class="feature-list">
+        <li>Нотатки прив'язані до конкретної теми</li>
+        <li>Автоматична дата запису</li>
+        <li>Повна хронологія по кожній темі</li>
+        <li>Будь-який текст: посилання, нотатки, висновки</li>
+      </ul>
+    </div>
+    <div class="feature-card reveal" style="transition-delay:0.25s">
+      <span class="feature-icon">03 // streak</span>
+      <h3>Streak система</h3>
+      <p>Мотивуй себе через консистентність. Кожен запис прогресу — день в серії.</p>
+      <ul class="feature-list">
+        <li>Поточний streak у реальному часі</li>
+        <li>Рекордна серія за весь час</li>
+        <li>Автоматичний скид якщо день пропущено</li>
+        <li>Відображення на головній сторінці</li>
+      </ul>
+    </div>
+    <div class="feature-card reveal" style="transition-delay:0.35s">
+      <span class="feature-icon">04 // stats</span>
+      <h3>Статистика</h3>
+      <p>Повна картина твого прогресу: скільки зроблено, де найбільше активності, як росте streak.</p>
+      <ul class="feature-list">
+        <li>Розподіл тем за статусом (графік)</li>
+        <li>Розподіл за пріоритетами</li>
+        <li>Найактивніша тема</li>
+        <li>Загальна кількість записів прогресу</li>
+      </ul>
+    </div>
+    <div class="feature-card reveal" style="transition-delay:0.45s">
+      <span class="feature-icon">05 // dashboard</span>
+      <h3>Dashboard</h3>
+      <p>Головна сторінка — швидкий огляд усього що відбувається. Один екран замість п'яти.</p>
+      <ul class="feature-list">
+        <li>Всі ключові цифри одразу</li>
+        <li>Останні додані теми</li>
+        <li>Швидке додавання нової теми</li>
+        <li>Поточний і рекордний streak</li>
+      </ul>
+    </div>
+    <div class="feature-card reveal" style="transition-delay:0.55s">
+      <span class="feature-icon">06 // auth</span>
+      <h3>Авторизація</h3>
+      <p>Твої дані — тільки твої. Кожен користувач бачить лише свої теми і прогрес.</p>
+      <ul class="feature-list">
+        <li>Реєстрація та логін через email</li>
+        <li>JWT-токени для захисту API</li>
+        <li>Ізольовані дані кожного юзера</li>
+        <li>Автоматичний редирект якщо не авторизований</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="preview reveal">
+  <div class="section-label" style="margin-bottom:0.5rem;">// під капотом — REST API на Flask</div>
+  <p style="font-family:'JetBrains Mono',monospace;font-size:0.75rem;color:var(--muted);margin-bottom:1.5rem;">JWT авторизація · усі дані через JSON · готовий до інтеграції</p>
+  <div class="terminal">
+    <div class="terminal-bar">
+      <span class="dot dot-r"></span><span class="dot dot-y"></span><span class="dot dot-g"></span>
+      <span class="terminal-ttl">GET /show_stats</span>
+    </div>
+    <div class="terminal-body">
+      <div class="t-line"><span class="t-muted">// статистика користувача</span></div>
+      <div class="t-line"><span class="t-muted">{</span></div>
+      <div class="t-line">&nbsp;&nbsp;<span class="t-blue">"All_topics"</span><span class="t-muted">: </span><span class="t-green">12</span><span class="t-muted">,</span></div>
+      <div class="t-line">&nbsp;&nbsp;<span class="t-blue">"completed"</span><span class="t-muted">: </span><span class="t-green">5</span><span class="t-muted">,</span></div>
+      <div class="t-line">&nbsp;&nbsp;<span class="t-blue">"in_progress"</span><span class="t-muted">: </span><span class="t-green">4</span><span class="t-muted">,</span></div>
+      <div class="t-line">&nbsp;&nbsp;<span class="t-blue">"current_streak"</span><span class="t-muted">: </span><span class="t-green">14</span><span class="t-muted">,</span></div>
+      <div class="t-line">&nbsp;&nbsp;<span class="t-blue">"longest_streak"</span><span class="t-muted">: </span><span class="t-green">21</span><span class="t-muted">,</span></div>
+      <div class="t-line">&nbsp;&nbsp;<span class="t-blue">"most_active_topic"</span><span class="t-muted">: </span><span class="t-green">"React Hooks"</span></div>
+      <div class="t-line"><span class="t-muted">}</span><span class="cursor"></span></div>
+    </div>
+  </div>
+  <div style="display:flex;gap:0.5rem;margin-top:1rem;flex-wrap:wrap;justify-content:center">
+    <span style="font-family:'JetBrains Mono',monospace;font-size:0.68rem;padding:0.25rem 0.7rem;background:rgba(0,255,136,0.05);border:1px solid rgba(0,255,136,0.15);border-radius:2px;color:var(--accent)">POST /add_topic</span>
+    <span style="font-family:'JetBrains Mono',monospace;font-size:0.68rem;padding:0.25rem 0.7rem;background:rgba(0,136,255,0.05);border:1px solid rgba(0,136,255,0.15);border-radius:2px;color:var(--accent2)">GET /get_topics</span>
+    <span style="font-family:'JetBrains Mono',monospace;font-size:0.68rem;padding:0.25rem 0.7rem;background:rgba(0,255,136,0.05);border:1px solid rgba(0,255,136,0.15);border-radius:2px;color:var(--accent)">POST /add_progress</span>
+    <span style="font-family:'JetBrains Mono',monospace;font-size:0.68rem;padding:0.25rem 0.7rem;background:rgba(0,136,255,0.05);border:1px solid rgba(0,136,255,0.15);border-radius:2px;color:var(--accent2)">GET /show_progress</span>
+    <span style="font-family:'JetBrains Mono',monospace;font-size:0.68rem;padding:0.25rem 0.7rem;background:rgba(0,255,136,0.05);border:1px solid rgba(0,255,136,0.15);border-radius:2px;color:var(--accent)">PATCH /edit_topic</span>
+  </div>
+</section>
+
+<section class="cta-bottom reveal">
+  <h2>Готовий почати?</h2>
+  <p>Зареєструйся і почни відстежувати своє навчання вже сьогодні.</p>
+  <button class="btn btn-primary btn-lg" onclick="openModal('register')">Створити акаунт</button>
+</section>
+
+<footer class="site-footer">
+  <span class="nav-logo" style="font-size:0.9rem;"><span>></span> DevTracker</span>
+  <span>// built with Flask + JS</span>
+</footer>
+
+<!-- MODALS -->
+<div class="modal-overlay" id="modal-login">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('login')">✕</button>
+    <div class="modal-title">Увійти</div>
+    <div class="modal-sub">// введи свої дані</div>
+    <div class="form-group"><label class="form-label">Email</label><input class="form-input" type="email" id="login-email" placeholder="you@example.com"/></div>
+    <div class="form-group"><label class="form-label">Пароль</label><input class="form-input" type="password" id="login-password" placeholder="••••••••"/></div>
+    <div class="form-error" id="login-error"></div>
+    <button class="btn btn-primary btn-full btn-lg" id="login-btn">Увійти</button>
+    <div class="form-switch">Немає акаунту? <a onclick="switchModal('login','register')">Зареєструватись</a></div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="modal-register">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('register')">✕</button>
+    <div class="modal-title">Реєстрація</div>
+    <div class="modal-sub">// створи акаунт</div>
+    <div class="form-group"><label class="form-label">Ім'я</label><input class="form-input" type="text" id="reg-firstname" placeholder="Іван"/></div>
+    <div class="form-group"><label class="form-label">Прізвище</label><input class="form-input" type="text" id="reg-lastname" placeholder="Петренко"/></div>
+    <div class="form-group"><label class="form-label">Email</label><input class="form-input" type="email" id="reg-email" placeholder="you@example.com"/></div>
+    <div class="form-group"><label class="form-label">Пароль</label><input class="form-input" type="password" id="reg-password" placeholder="••••••••"/></div>
+    <div class="form-error" id="reg-error"></div>
+    <button class="btn btn-primary btn-full btn-lg" id="register-btn">Зареєструватись</button>
+    <div class="form-switch">Вже є акаунт? <a onclick="switchModal('register','login')">Увійти</a></div>
+  </div>
+</div>
+
+<div id="toast"></div>
+
+<script>
+  // ── Scroll reveal ──
+  const revealObs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('in'); revealObs.unobserve(e.target); }
+    });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
+
+  // ── Nav scroll state + progress bar ──
+  const progressBar = document.getElementById('scroll-progress');
+  window.addEventListener('scroll', () => {
+    const scrolled = window.scrollY / (document.documentElement.scrollHeight - window.innerHeight);
+    progressBar.style.width = (scrolled * 100) + '%';
+    document.querySelector('nav').classList.toggle('scrolled', window.scrollY > 50);
+  }, { passive: true });
+
+  // ── Terminal typewriter ──
+  const termLines = document.querySelectorAll('.t-line');
+  const termObs = new IntersectionObserver(entries => {
+    if (entries[0].isIntersecting) {
+      termLines.forEach((line, i) => setTimeout(() => line.classList.add('typed'), i * 220));
+      termObs.disconnect();
+    }
+  }, { threshold: 0.5 });
+  const termEl = document.querySelector('.terminal');
+  if (termEl) termObs.observe(termEl);
+</script>
+
+<script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>DevTracker — Dashboard</title>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+<div class="bg-orb bg-orb-1"></div>
+<div class="bg-orb bg-orb-2"></div>
+
+<nav>
+  <a class="nav-logo" href="index.html"><span>></span> DevTracker</a>
+  <div class="nav-links">
+    <a class="nav-link active" href="dashboard.html">// dashboard</a>
+    <a class="nav-link" href="topics.html">// теми</a>
+    <a class="nav-link" href="stats.html">// статистика</a>
+  </div>
+  <div class="nav-actions">
+    <span class="nav-user" id="nav-email"></span>
+    <button class="btn btn-ghost btn-sm" id="logout-btn">Вийти</button>
+  </div>
+</nav>
+
+<div class="page">
+  <div class="page-header fade-up">
+    <div class="page-label">// overview</div>
+    <div class="page-title" id="greeting">Привіт 👋</div>
+    <div class="page-sub" id="streak-line">// завантаження...</div>
+  </div>
+
+  <!-- STAT GRID -->
+  <div class="stat-grid fade-up">
+    <div class="stat-card">
+      <span class="stat-val" id="stat-all">—</span>
+      <div class="stat-label">Всього тем</div>
+    </div>
+    <div class="stat-card">
+      <span class="stat-val blue" id="stat-prog">—</span>
+      <div class="stat-label">В процесі</div>
+    </div>
+    <div class="stat-card">
+      <span class="stat-val" id="stat-done">—</span>
+      <div class="stat-label">Завершено</div>
+    </div>
+    <div class="stat-card">
+      <span class="stat-val warn" id="stat-streak">—</span>
+      <div class="stat-label">Streak 🔥</div>
+    </div>
+    <div class="stat-card">
+      <span class="stat-val" id="stat-best">—</span>
+      <div class="stat-label">Рекорд</div>
+    </div>
+  </div>
+
+  <!-- QUICK ADD TOPIC -->
+  <div class="actions-bar reveal" style="transition-delay:0.5s">
+    <div class="page-label" style="margin:0;">// останні теми</div>
+    <a href="topics.html" class="btn btn-ghost btn-sm">Всі теми →</a>
+  </div>
+
+  <div class="form-row reveal" style="transition-delay:0.6s">
+    <input class="input input-grow" type="text" id="quick-title" placeholder="Нова тема..."/>
+    <select class="select-input" id="quick-priority">
+      <option value="1">P1</option>
+      <option value="2">P2</option>
+      <option value="3" selected>P3</option>
+      <option value="4">P4</option>
+      <option value="5">P5</option>
+    </select>
+    <button class="btn btn-primary" id="quick-add-btn">+ Додати</button>
+  </div>
+
+  <!-- TOPICS LIST (last 5) -->
+  <div class="data-list reveal" style="transition-delay:0.7s" id="topics-list">
+    <div class="data-row-empty">// завантаження тем...</div>
+  </div>
+
+</div>
+
+<footer class="site-footer">
+  <span class="nav-logo" style="font-size:0.85rem;"><span>></span> DevTracker</span>
+  <span>// dashboard</span>
+</footer>
+
+<div id="toast"></div>
+
+<script>
+  // Nav scroll state
+  window.addEventListener('scroll', () => {
+    document.querySelector('nav').classList.toggle('scrolled', window.scrollY > 50);
+  }, { passive: true });
+
+  // Scroll reveal
+  const revealObs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); revealObs.unobserve(e.target); } });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
+</script>
+
+<script src="app.js"></script>
+</body>
+</html>

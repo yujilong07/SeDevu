@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>DevTracker — Статистика</title>
+  <link rel="stylesheet" href="style.css"/>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+  <style>
+    .streak-bar {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--accent);
+      padding: 1.2rem 1.5rem;
+      border-radius: 4px;
+      margin-bottom: 2rem;
+    }
+    .streak-fire { font-size: 2rem; /* pulse via style.css .streak-fire */ }
+    .streak-info { flex: 1; }
+    .streak-current { font-family: 'JetBrains Mono', monospace; font-size: 1.5rem; font-weight: 700; color: var(--accent); }
+    .streak-record { font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: var(--muted); margin-top: 0.2rem; }
+
+    .charts-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    canvas { max-height: 260px; }
+  </style>
+</head>
+<body>
+
+<div class="bg-orb bg-orb-1"></div>
+<div class="bg-orb bg-orb-2"></div>
+
+<nav>
+  <a class="nav-logo" href="index.html"><span>></span> DevTracker</a>
+  <div class="nav-links">
+    <a class="nav-link" href="dashboard.html">// dashboard</a>
+    <a class="nav-link" href="topics.html">// теми</a>
+    <a class="nav-link active" href="stats.html">// статистика</a>
+  </div>
+  <div class="nav-actions">
+    <span class="nav-user" id="nav-email"></span>
+    <button class="btn btn-ghost btn-sm" id="logout-btn">Вийти</button>
+  </div>
+</nav>
+
+<div class="page">
+  <div class="page-header fade-up">
+    <div class="page-label">// statistics</div>
+    <div class="page-title">Статистика</div>
+    <div class="page-sub">// твій прогрес у цифрах</div>
+  </div>
+
+  <!-- STREAK -->
+  <div class="streak-bar fade-up" id="streak-bar">
+    <div class="streak-fire">🔥</div>
+    <div class="streak-info">
+      <div class="streak-current" id="streak-current">— днів підряд</div>
+      <div class="streak-record" id="streak-record">// рекорд: —</div>
+    </div>
+  </div>
+
+  <!-- NUMBERS -->
+  <div class="stat-grid fade-up">
+    <div class="stat-card"><span class="stat-val" id="s-all">—</span><div class="stat-label">Всього тем</div></div>
+    <div class="stat-card"><span class="stat-val" id="s-done">—</span><div class="stat-label">Завершено</div></div>
+    <div class="stat-card"><span class="stat-val blue" id="s-prog">—</span><div class="stat-label">В процесі</div></div>
+    <div class="stat-card"><span class="stat-val warn" id="s-ns">—</span><div class="stat-label">Не почато</div></div>
+    <div class="stat-card"><span class="stat-val" id="s-logs">—</span><div class="stat-label">Записів прогресу</div></div>
+  </div>
+
+  <!-- CHARTS -->
+  <div class="charts-grid">
+    <div class="chart-wrap reveal">
+      <div class="chart-title">// розподіл тем за статусом</div>
+      <canvas id="chart-status"></canvas>
+    </div>
+    <div class="chart-wrap reveal" style="transition-delay:0.15s">
+      <div class="chart-title">// пріоритети тем</div>
+      <canvas id="chart-priority"></canvas>
+    </div>
+  </div>
+
+  <!-- MOST ACTIVE -->
+  <div class="panel reveal" style="transition-delay:0.2s">
+    <div class="panel-title">// найактивніша тема</div>
+    <div id="most-active-info" style="font-family:'JetBrains Mono',monospace;font-size:0.82rem;color:var(--muted);">// завантаження...</div>
+  </div>
+
+</div>
+
+<footer class="site-footer">
+  <span class="nav-logo" style="font-size:0.85rem;"><span>></span> DevTracker</span>
+  <span>// statistics</span>
+</footer>
+
+<div id="toast"></div>
+
+<script>
+  window.addEventListener('scroll', () => {
+    document.querySelector('nav').classList.toggle('scrolled', window.scrollY > 50);
+  }, { passive: true });
+
+  const revealObs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); revealObs.unobserve(e.target); } });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
+</script>
+
+<script src="app.js"></script>
+</body>
+</html>

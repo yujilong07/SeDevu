@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>DevTracker — Теми</title>
+  <link rel="stylesheet" href="style.css"/>
+  <style>
+    .topic-row { flex-wrap: wrap; }
+    .topic-title { flex: 1; min-width: 140px; font-size: 0.92rem; font-weight: 600; }
+    .topic-priority { font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; color: var(--muted); }
+    .topic-actions { display: flex; gap: 0.4rem; flex-wrap: wrap; }
+
+    /* progress log panel */
+    .log-panel {
+      display: none;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-top: none;
+      padding: 1.2rem;
+    }
+    .log-panel.open { display: block; }
+    .log-panel-title { font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; color: var(--muted); margin-bottom: 0.8rem; letter-spacing: 0.08em; }
+    .log-entries { margin-bottom: 1rem; }
+  </style>
+</head>
+<body>
+
+<div class="bg-orb bg-orb-1"></div>
+<div class="bg-orb bg-orb-2"></div>
+
+<nav>
+  <a class="nav-logo" href="index.html"><span>></span> DevTracker</a>
+  <div class="nav-links">
+    <a class="nav-link" href="dashboard.html">// dashboard</a>
+    <a class="nav-link active" href="topics.html">// теми</a>
+    <a class="nav-link" href="stats.html">// статистика</a>
+  </div>
+  <div class="nav-actions">
+    <span class="nav-user" id="nav-email"></span>
+    <button class="btn btn-ghost btn-sm" id="logout-btn">Вийти</button>
+  </div>
+</nav>
+
+<div class="page">
+  <div class="page-header fade-up">
+    <div class="page-label">// topics</div>
+    <div class="page-title">Мої теми</div>
+    <div class="page-sub">// додавай, відстежуй і завершуй теми</div>
+  </div>
+
+  <!-- ADD TOPIC FORM -->
+  <div class="panel fade-up" style="animation-delay:0.15s">
+    <div class="panel-title">// нова тема</div>
+    <div class="form-row">
+      <input class="input input-grow" type="text" id="new-title" placeholder="Назва теми..."/>
+      <select class="select-input" id="new-priority">
+        <option value="1">Пріоритет 1</option>
+        <option value="2">Пріоритет 2</option>
+        <option value="3" selected>Пріоритет 3</option>
+        <option value="4">Пріоритет 4</option>
+        <option value="5">Пріоритет 5</option>
+      </select>
+      <button class="btn btn-primary" id="add-topic-btn">+ Додати тему</button>
+    </div>
+  </div>
+
+  <!-- FILTER -->
+  <div class="actions-bar reveal" style="transition-delay:0.3s">
+    <div class="page-label" style="margin:0;">// список тем</div>
+    <div style="display:flex;gap:0.5rem;">
+      <button class="btn btn-ghost btn-sm filter-btn active" data-filter="all">Всі</button>
+      <button class="btn btn-ghost btn-sm filter-btn" data-filter="not_started">Не почато</button>
+      <button class="btn btn-ghost btn-sm filter-btn" data-filter="in_progress">В процесі</button>
+      <button class="btn btn-ghost btn-sm filter-btn" data-filter="completed">Завершено</button>
+    </div>
+  </div>
+
+  <!-- TOPICS -->
+  <div id="topics-container" class="reveal" style="transition-delay:0.4s">
+    <div class="data-list">
+      <div class="data-row-empty">// завантаження тем...</div>
+    </div>
+  </div>
+
+</div>
+
+<!-- MODAL: Edit topic -->
+<div class="modal-overlay" id="modal-edit">
+  <div class="modal">
+    <button class="modal-close" onclick="closeEditModal()">✕</button>
+    <div class="modal-title">Редагувати тему</div>
+    <div class="modal-sub">// оновити дані</div>
+    <input type="hidden" id="edit-topic-id"/>
+    <div class="form-group"><label class="form-label">Назва</label><input class="form-input" type="text" id="edit-title"/></div>
+    <div class="form-group">
+      <label class="form-label">Статус</label>
+      <select class="form-input" id="edit-status">
+        <option value="not_started">Не почато</option>
+        <option value="in_progress">В процесі</option>
+        <option value="completed">Завершено</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Пріоритет</label>
+      <select class="form-input" id="edit-priority">
+        <option value="1">1</option><option value="2">2</option>
+        <option value="3">3</option><option value="4">4</option><option value="5">5</option>
+      </select>
+    </div>
+    <button class="btn btn-primary btn-full" id="save-edit-btn">Зберегти</button>
+  </div>
+</div>
+
+<!-- MODAL: Add progress log -->
+<div class="modal-overlay" id="modal-log">
+  <div class="modal">
+    <button class="modal-close" onclick="closeLogModal()">✕</button>
+    <div class="modal-title">Додати запис</div>
+    <div class="modal-sub" id="log-modal-sub">// прогрес по темі</div>
+    <input type="hidden" id="log-topic-id"/>
+    <div class="form-group">
+      <label class="form-label">Що зробив?</label>
+      <textarea class="form-textarea" id="log-note" placeholder="Вивчив... Написав... Розібрався з..."></textarea>
+    </div>
+    <button class="btn btn-primary btn-full" id="save-log-btn">Зберегти запис</button>
+  </div>
+</div>
+
+<footer class="site-footer">
+  <span class="nav-logo" style="font-size:0.85rem;"><span>></span> DevTracker</span>
+  <span>// topics</span>
+</footer>
+
+<div id="toast"></div>
+
+<script>
+  window.addEventListener('scroll', () => {
+    document.querySelector('nav').classList.toggle('scrolled', window.scrollY > 50);
+  }, { passive: true });
+
+  const revealObs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); revealObs.unobserve(e.target); } });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
+</script>
+
+<script src="app.js"></script>
+</body>
+</html>
