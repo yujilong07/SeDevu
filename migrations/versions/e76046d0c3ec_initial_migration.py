@@ -42,7 +42,7 @@ def upgrade():
     sa.Column('user_id', sa.Integer(), nullable=True),
     sa.Column('title', sa.String(), nullable=False),
     sa.Column('priority', sa.Integer(), nullable=True),
-    sa.Column('status', sa.Enum('not_started', 'in_progress', 'completed'), nullable=True),
+    sa.Column('status', sa.Enum('not_started', 'in_progress', 'completed', name='status_enum'), nullable=True),
     sa.Column('created_at', sa.DateTime(), nullable=True),
     sa.ForeignKeyConstraint(['user_id'], ['user.pid'], ),
     sa.PrimaryKeyConstraint('id')
