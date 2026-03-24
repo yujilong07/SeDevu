@@ -16,5 +16,5 @@ class Topic(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey("user.pid"))
     title = db.Column(db.String, nullable = False)
     priority = db.Column(db.Integer)
-    status = db.Column(db.Enum('not_started', 'in_progress', 'completed'))
+    status = db.Column(db.Enum('not_started', 'in_progress', 'completed', name='status_enum'))
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
