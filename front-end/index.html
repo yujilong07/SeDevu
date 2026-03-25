@@ -114,10 +114,19 @@
 <nav>
   <a class="nav-logo" href="#"><span>></span> DevTracker</a>
   <div class="nav-actions">
-    <button class="btn btn-ghost" onclick="openModal('login')">Логін</button>
-    <button class="btn btn-primary" onclick="openModal('register')">Реєстрація</button>
+    <button class="lang-btn" onclick="switchLang()">EN</button>
+    <button class="btn btn-ghost" onclick="openModal('login')" data-i18n="nav.login">Логін</button>
+    <button class="btn btn-primary" onclick="openModal('register')" data-i18n="nav.register">Реєстрація</button>
+    <button class="nav-hamburger" id="nav-hamburger" onclick="toggleMobileMenu()">☰</button>
   </div>
 </nav>
+<div class="nav-mobile-menu" id="nav-mobile-menu">
+  <div class="mob-menu-footer" style="border-top:none;padding-top:0;margin-top:0;">
+    <button class="lang-btn" onclick="switchLang()">EN</button>
+    <button class="btn btn-ghost btn-sm" onclick="openModal('login')" data-i18n="nav.login">Логін</button>
+    <button class="btn btn-primary btn-sm" onclick="openModal('register')" data-i18n="nav.register">Реєстрація</button>
+  </div>
+</div>
 
 <section class="hero">
   <div class="hero-deco" aria-hidden="true">
@@ -316,28 +325,52 @@
 <div class="modal-overlay" id="modal-login">
   <div class="modal">
     <button class="modal-close" onclick="closeModal('login')">✕</button>
-    <div class="modal-title">Увійти</div>
-    <div class="modal-sub">// введи свої дані</div>
-    <div class="form-group"><label class="form-label">Email</label><input class="form-input" type="email" id="login-email" placeholder="you@example.com"/></div>
-    <div class="form-group"><label class="form-label">Пароль</label><input class="form-input" type="password" id="login-password" placeholder="••••••••"/></div>
+    <div class="modal-title" data-i18n="modal.login.title">Увійти</div>
+    <div class="modal-sub" data-i18n="modal.login.sub">// введи свої дані</div>
+    <div class="form-group">
+      <label class="form-label" data-i18n="modal.login.email">Email</label>
+      <input class="form-input" type="email" id="login-email" placeholder="you@example.com"/>
+    </div>
+    <div class="form-group">
+      <label class="form-label" data-i18n="modal.login.pass">Пароль</label>
+      <input class="form-input" type="password" id="login-password" placeholder="••••••••"/>
+    </div>
     <div class="form-error" id="login-error"></div>
-    <button class="btn btn-primary btn-full btn-lg" id="login-btn">Увійти</button>
-    <div class="form-switch">Немає акаунту? <a onclick="switchModal('login','register')">Зареєструватись</a></div>
+    <button class="btn btn-primary btn-full btn-lg" id="login-btn" data-i18n="modal.login.btn">Увійти</button>
+    <div class="form-switch">
+      <span data-i18n="modal.login.noacc">Немає акаунту?</span>
+      <a onclick="switchModal('login','register')" data-i18n="modal.login.link">Зареєструватись</a>
+    </div>
   </div>
 </div>
 
 <div class="modal-overlay" id="modal-register">
   <div class="modal">
     <button class="modal-close" onclick="closeModal('register')">✕</button>
-    <div class="modal-title">Реєстрація</div>
-    <div class="modal-sub">// створи акаунт</div>
-    <div class="form-group"><label class="form-label">Ім'я</label><input class="form-input" type="text" id="reg-firstname" placeholder="Іван"/></div>
-    <div class="form-group"><label class="form-label">Прізвище</label><input class="form-input" type="text" id="reg-lastname" placeholder="Петренко"/></div>
-    <div class="form-group"><label class="form-label">Email</label><input class="form-input" type="email" id="reg-email" placeholder="you@example.com"/></div>
-    <div class="form-group"><label class="form-label">Пароль</label><input class="form-input" type="password" id="reg-password" placeholder="••••••••"/></div>
+    <div class="modal-title" data-i18n="modal.reg.title">Реєстрація</div>
+    <div class="modal-sub" data-i18n="modal.reg.sub">// створи акаунт</div>
+    <div class="form-group">
+      <label class="form-label" data-i18n="modal.reg.fn">Ім'я</label>
+      <input class="form-input" type="text" id="reg-firstname" placeholder="Іван"/>
+    </div>
+    <div class="form-group">
+      <label class="form-label" data-i18n="modal.reg.ln">Прізвище</label>
+      <input class="form-input" type="text" id="reg-lastname" placeholder="Петренко"/>
+    </div>
+    <div class="form-group">
+      <label class="form-label" data-i18n="modal.reg.email">Email</label>
+      <input class="form-input" type="email" id="reg-email" placeholder="you@example.com"/>
+    </div>
+    <div class="form-group">
+      <label class="form-label" data-i18n="modal.reg.pass">Пароль</label>
+      <input class="form-input" type="password" id="reg-password" placeholder="••••••••"/>
+    </div>
     <div class="form-error" id="reg-error"></div>
-    <button class="btn btn-primary btn-full btn-lg" id="register-btn">Зареєструватись</button>
-    <div class="form-switch">Вже є акаунт? <a onclick="switchModal('register','login')">Увійти</a></div>
+    <button class="btn btn-primary btn-full btn-lg" id="register-btn" data-i18n="modal.reg.btn">Зареєструватись</button>
+    <div class="form-switch">
+      <span data-i18n="modal.reg.hasacc">Вже є акаунт?</span>
+      <a onclick="switchModal('register','login')" data-i18n="modal.reg.link">Увійти</a>
+    </div>
   </div>
 </div>
 

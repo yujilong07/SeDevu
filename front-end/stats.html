@@ -18,10 +18,10 @@
       border-radius: 4px;
       margin-bottom: 2rem;
     }
-    .streak-fire { font-size: 2rem; /* pulse via style.css .streak-fire */ }
+    .streak-fire { font-size: 2rem; }
     .streak-info { flex: 1; }
     .streak-current { font-family: 'JetBrains Mono', monospace; font-size: 1.5rem; font-weight: 700; color: var(--accent); }
-    .streak-record { font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: var(--muted); margin-top: 0.2rem; }
+    .streak-record  { font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: var(--muted); margin-top: 0.2rem; }
 
     .charts-grid {
       display: grid;
@@ -41,21 +41,33 @@
 <nav>
   <a class="nav-logo" href="index.html"><span>></span> DevTracker</a>
   <div class="nav-links">
-    <a class="nav-link" href="dashboard.html">// dashboard</a>
-    <a class="nav-link" href="topics.html">// теми</a>
-    <a class="nav-link active" href="stats.html">// статистика</a>
+    <a class="nav-link" href="dashboard.html" data-i18n="nav.dashboard">// dashboard</a>
+    <a class="nav-link" href="topics.html" data-i18n="nav.topics">// теми</a>
+    <a class="nav-link active" href="stats.html" data-i18n="nav.stats">// статистика</a>
   </div>
   <div class="nav-actions">
     <span class="nav-user" id="nav-email"></span>
-    <button class="btn btn-ghost btn-sm" id="logout-btn">Вийти</button>
+    <button class="lang-btn" onclick="switchLang()">EN</button>
+    <button class="btn btn-ghost btn-sm" id="logout-btn" data-i18n="nav.logout">Вийти</button>
+    <button class="nav-hamburger" id="nav-hamburger" onclick="toggleMobileMenu()">☰</button>
   </div>
 </nav>
+
+<div class="nav-mobile-menu" id="nav-mobile-menu">
+  <a class="nav-link" href="dashboard.html" data-i18n="nav.dashboard">// dashboard</a>
+  <a class="nav-link" href="topics.html" data-i18n="nav.topics">// теми</a>
+  <a class="nav-link active" href="stats.html" data-i18n="nav.stats">// статистика</a>
+  <div class="mob-menu-footer">
+    <button class="lang-btn" onclick="switchLang()">EN</button>
+    <button class="btn btn-ghost btn-sm" id="mob-logout-btn" style="display:none" data-i18n="nav.logout">Вийти</button>
+  </div>
+</div>
 
 <div class="page">
   <div class="page-header fade-up">
     <div class="page-label">// statistics</div>
-    <div class="page-title">Статистика</div>
-    <div class="page-sub">// твій прогрес у цифрах</div>
+    <div class="page-title" data-i18n="stats.title">Статистика</div>
+    <div class="page-sub" data-i18n="stats.sub">// твій прогрес у цифрах</div>
   </div>
 
   <!-- STREAK -->
@@ -63,17 +75,17 @@
     <div class="streak-fire">🔥</div>
     <div class="streak-info">
       <div class="streak-current" id="streak-current">— днів підряд</div>
-      <div class="streak-record" id="streak-record">// рекорд: —</div>
+      <div class="streak-record"  id="streak-record">// рекорд: —</div>
     </div>
   </div>
 
   <!-- NUMBERS -->
   <div class="stat-grid fade-up">
-    <div class="stat-card"><span class="stat-val" id="s-all">—</span><div class="stat-label">Всього тем</div></div>
-    <div class="stat-card"><span class="stat-val" id="s-done">—</span><div class="stat-label">Завершено</div></div>
-    <div class="stat-card"><span class="stat-val blue" id="s-prog">—</span><div class="stat-label">В процесі</div></div>
-    <div class="stat-card"><span class="stat-val warn" id="s-ns">—</span><div class="stat-label">Не почато</div></div>
-    <div class="stat-card"><span class="stat-val" id="s-logs">—</span><div class="stat-label">Записів прогресу</div></div>
+    <div class="stat-card"><span class="stat-val" id="s-all">—</span><div class="stat-label" data-i18n="stats.all">Всього тем</div></div>
+    <div class="stat-card"><span class="stat-val" id="s-done">—</span><div class="stat-label" data-i18n="stats.done">Завершено</div></div>
+    <div class="stat-card"><span class="stat-val blue" id="s-prog">—</span><div class="stat-label" data-i18n="stats.inprog">В процесі</div></div>
+    <div class="stat-card"><span class="stat-val warn" id="s-ns">—</span><div class="stat-label" data-i18n="stats.notstarted">Не почато</div></div>
+    <div class="stat-card"><span class="stat-val" id="s-logs">—</span><div class="stat-label" data-i18n="stats.logs">Записів прогресу</div></div>
   </div>
 
   <!-- CHARTS -->

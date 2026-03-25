@@ -32,47 +32,60 @@
 <nav>
   <a class="nav-logo" href="index.html"><span>></span> DevTracker</a>
   <div class="nav-links">
-    <a class="nav-link" href="dashboard.html">// dashboard</a>
-    <a class="nav-link active" href="topics.html">// теми</a>
-    <a class="nav-link" href="stats.html">// статистика</a>
+    <a class="nav-link" href="dashboard.html" data-i18n="nav.dashboard">// dashboard</a>
+    <a class="nav-link active" href="topics.html" data-i18n="nav.topics">// теми</a>
+    <a class="nav-link" href="stats.html" data-i18n="nav.stats">// статистика</a>
   </div>
   <div class="nav-actions">
     <span class="nav-user" id="nav-email"></span>
-    <button class="btn btn-ghost btn-sm" id="logout-btn">Вийти</button>
+    <button class="lang-btn" onclick="switchLang()">EN</button>
+    <button class="btn btn-ghost btn-sm" id="logout-btn" data-i18n="nav.logout">Вийти</button>
+    <button class="nav-hamburger" id="nav-hamburger" onclick="toggleMobileMenu()">☰</button>
   </div>
 </nav>
+
+<div class="nav-mobile-menu" id="nav-mobile-menu">
+  <a class="nav-link" href="dashboard.html" data-i18n="nav.dashboard">// dashboard</a>
+  <a class="nav-link active" href="topics.html" data-i18n="nav.topics">// теми</a>
+  <a class="nav-link" href="stats.html" data-i18n="nav.stats">// статистика</a>
+  <div class="mob-menu-footer">
+    <button class="lang-btn" onclick="switchLang()">EN</button>
+    <button class="btn btn-ghost btn-sm" id="mob-logout-btn" style="display:none" data-i18n="nav.logout">Вийти</button>
+  </div>
+</div>
 
 <div class="page">
   <div class="page-header fade-up">
     <div class="page-label">// topics</div>
-    <div class="page-title">Мої теми</div>
-    <div class="page-sub">// додавай, відстежуй і завершуй теми</div>
+    <div class="page-title" data-i18n="topics.title">Мої теми</div>
+    <div class="page-sub" data-i18n="topics.sub">// додавай, відстежуй і завершуй теми</div>
   </div>
 
   <!-- ADD TOPIC FORM -->
   <div class="panel fade-up" style="animation-delay:0.15s">
-    <div class="panel-title">// нова тема</div>
+    <div class="panel-title" data-i18n="topics.panel">// нова тема</div>
     <div class="form-row">
-      <input class="input input-grow" type="text" id="new-title" placeholder="Назва теми..."/>
+      <input class="input input-grow" type="text" id="new-title"
+        placeholder="Назва теми..." data-i18n-placeholder="topics.add.placeholder"/>
       <select class="select-input" id="new-priority">
-        <option value="1">Пріоритет 1</option>
-        <option value="2">Пріоритет 2</option>
-        <option value="3" selected>Пріоритет 3</option>
-        <option value="4">Пріоритет 4</option>
-        <option value="5">Пріоритет 5</option>
+        <option value="1">P1</option>
+        <option value="2">P2</option>
+        <option value="3" selected>P3</option>
+        <option value="4">P4</option>
+        <option value="5">P5</option>
       </select>
-      <button class="btn btn-primary" id="add-topic-btn">+ Додати тему</button>
+      <button class="btn btn-primary" id="add-topic-btn" data-i18n="topics.addbtn">+ Додати тему</button>
     </div>
   </div>
 
   <!-- FILTER -->
   <div class="actions-bar reveal" style="transition-delay:0.3s">
-    <div class="page-label" style="margin:0;">// список тем</div>
-    <div style="display:flex;gap:0.5rem;">
-      <button class="btn btn-ghost btn-sm filter-btn active" data-filter="all">Всі</button>
-      <button class="btn btn-ghost btn-sm filter-btn" data-filter="not_started">Не почато</button>
-      <button class="btn btn-ghost btn-sm filter-btn" data-filter="in_progress">В процесі</button>
-      <button class="btn btn-ghost btn-sm filter-btn" data-filter="completed">Завершено</button>
+    <div class="page-label" style="margin:0;" data-i18n="topics.list.label">// список тем</div>
+    <div style="display:flex;gap:0.5rem;flex-wrap:wrap;">
+      <button class="btn btn-ghost btn-sm filter-btn active" data-filter="all" data-i18n="topics.filter.all">Всі</button>
+      <button class="btn btn-ghost btn-sm filter-btn" data-filter="not_started" data-i18n="topics.filter.ns">Не почато</button>
+      <button class="btn btn-ghost btn-sm filter-btn" data-filter="in_progress" data-i18n="topics.filter.ip">В процесі</button>
+      <button class="btn btn-ghost btn-sm filter-btn" data-filter="completed" data-i18n="topics.filter.done">Завершено</button>
     </div>
   </div>
 
@@ -89,26 +102,29 @@
 <div class="modal-overlay" id="modal-edit">
   <div class="modal">
     <button class="modal-close" onclick="closeEditModal()">✕</button>
-    <div class="modal-title">Редагувати тему</div>
+    <div class="modal-title" data-i18n="topics.edit.title">Редагувати тему</div>
     <div class="modal-sub">// оновити дані</div>
     <input type="hidden" id="edit-topic-id"/>
-    <div class="form-group"><label class="form-label">Назва</label><input class="form-input" type="text" id="edit-title"/></div>
     <div class="form-group">
-      <label class="form-label">Статус</label>
+      <label class="form-label" data-i18n="topics.edit.name">Назва</label>
+      <input class="form-input" type="text" id="edit-title"/>
+    </div>
+    <div class="form-group">
+      <label class="form-label" data-i18n="topics.edit.status">Статус</label>
       <select class="form-input" id="edit-status">
-        <option value="not_started">Не почато</option>
-        <option value="in_progress">В процесі</option>
-        <option value="completed">Завершено</option>
+        <option value="not_started" data-i18n="stat.opt.ns">Не почато</option>
+        <option value="in_progress" data-i18n="stat.opt.ip">В процесі</option>
+        <option value="completed" data-i18n="stat.opt.done">Завершено</option>
       </select>
     </div>
     <div class="form-group">
-      <label class="form-label">Пріоритет</label>
+      <label class="form-label" data-i18n="topics.edit.prio">Пріоритет</label>
       <select class="form-input" id="edit-priority">
         <option value="1">1</option><option value="2">2</option>
         <option value="3">3</option><option value="4">4</option><option value="5">5</option>
       </select>
     </div>
-    <button class="btn btn-primary btn-full" id="save-edit-btn">Зберегти</button>
+    <button class="btn btn-primary btn-full" id="save-edit-btn" data-i18n="topics.edit.btn">Зберегти</button>
   </div>
 </div>
 
@@ -116,14 +132,16 @@
 <div class="modal-overlay" id="modal-log">
   <div class="modal">
     <button class="modal-close" onclick="closeLogModal()">✕</button>
-    <div class="modal-title">Додати запис</div>
+    <div class="modal-title" data-i18n="topics.log.title">Додати запис</div>
     <div class="modal-sub" id="log-modal-sub">// прогрес по темі</div>
     <input type="hidden" id="log-topic-id"/>
     <div class="form-group">
-      <label class="form-label">Що зробив?</label>
-      <textarea class="form-textarea" id="log-note" placeholder="Вивчив... Написав... Розібрався з..."></textarea>
+      <label class="form-label" data-i18n="topics.log.label">Що зробив?</label>
+      <textarea class="form-textarea" id="log-note"
+        placeholder="Вивчив... Написав... Розібрався з..."
+        data-i18n-placeholder="topics.log.placeholder"></textarea>
     </div>
-    <button class="btn btn-primary btn-full" id="save-log-btn">Зберегти запис</button>
+    <button class="btn btn-primary btn-full" id="save-log-btn" data-i18n="topics.log.btn">Зберегти запис</button>
   </div>
 </div>
 
