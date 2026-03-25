@@ -1,4 +1,4 @@
-const API = 'http://localhost:5000';
+const API = 'https://heroic-flow-production-0c80.up.railway.app';
 
 // ── Token / session helpers ──
 function getToken()    { return localStorage.getItem('token'); }
