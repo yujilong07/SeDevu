@@ -136,46 +136,46 @@
     <span class="deco-code" style="top:65%;right:6%;animation-duration:10s;animation-delay:-1s;color:var(--accent2)">GET /show_stats → 200 OK</span>
     <span class="deco-code" style="bottom:18%;left:12%;animation-duration:6s;animation-delay:-4s;color:var(--accent2)">// keep learning 🚀</span>
   </div>
-  <div class="hero-badge">// track your dev journey</div>
-  <h1>Відстежуй своє<br/><span class="hl">навчання</span></h1>
-  <p>Ведіть щоденник навчання як розробник. Додавайте теми з пріоритетами, щодня фіксуйте що вивчили, підтримуйте streak і дивіться статистику свого зростання.</p>
+  <div class="hero-badge" data-i18n="hero.badge">// track your dev journey</div>
+  <h1><span data-i18n="hero.h1.line1">Відстежуй своє</span><br/><span class="hl" data-i18n="hero.h1.span">навчання</span></h1>
+  <p data-i18n="hero.desc">Ведіть щоденник навчання як розробник. Додавайте теми з пріоритетами, щодня фіксуйте що вивчили, підтримуйте streak і дивіться статистику свого зростання.</p>
   <div class="hero-cta">
-    <button class="btn btn-primary btn-lg" onclick="openModal('register')">Почати безкоштовно</button>
-    <button class="btn btn-ghost btn-lg" onclick="openModal('login')">Увійти</button>
+    <button class="btn btn-primary btn-lg" onclick="openModal('register')" data-i18n="hero.cta.start">Почати безкоштовно</button>
+    <button class="btn btn-ghost btn-lg" onclick="openModal('login')" data-i18n="hero.cta.login">Увійти</button>
   </div>
 </section>
 
 <div class="stats-bar reveal">
   <div class="stat-item">
     <span class="stat-number">∞</span>
-    <span class="stat-name">Теми</span>
-    <span class="stat-lbl">пріоритети P1–P5</span>
+    <span class="stat-name" data-i18n="sbar.topics.name">Теми</span>
+    <span class="stat-lbl" data-i18n="sbar.topics.lbl">пріоритети P1–P5</span>
   </div>
   <div class="stat-item">
     <span class="stat-number" style="font-size:1.5rem">📝</span>
-    <span class="stat-name">Прогрес</span>
-    <span class="stat-lbl">журнал по кожній темі</span>
+    <span class="stat-name" data-i18n="sbar.prog.name">Прогрес</span>
+    <span class="stat-lbl" data-i18n="sbar.prog.lbl">журнал по кожній темі</span>
   </div>
   <div class="stat-item">
     <span class="stat-number" style="font-size:1.5rem">🔥</span>
-    <span class="stat-name">Streak</span>
-    <span class="stat-lbl">серія активних днів</span>
+    <span class="stat-name" data-i18n="sbar.streak.name">Streak</span>
+    <span class="stat-lbl" data-i18n="sbar.streak.lbl">серія активних днів</span>
   </div>
   <div class="stat-item">
     <span class="stat-number" style="font-size:1.5rem">📊</span>
-    <span class="stat-name">Статистика</span>
-    <span class="stat-lbl">графіки і показники</span>
+    <span class="stat-name" data-i18n="sbar.stats.name">Статистика</span>
+    <span class="stat-lbl" data-i18n="sbar.stats.lbl">графіки і показники</span>
   </div>
 </div>
 
 <section class="how-it-works">
-  <div class="section-label reveal">// як це працює</div>
-  <h2 class="section-title reveal" style="transition-delay:0.1s">Три кроки до прогресу</h2>
+  <div class="section-label reveal" data-i18n="hiw.label">// як це працює</div>
+  <h2 class="section-title reveal" style="transition-delay:0.1s" data-i18n="hiw.title">Три кроки до прогресу</h2>
   <div class="hiw-steps">
     <div class="hiw-step reveal" style="transition-delay:0.05s">
       <div class="hiw-num">step 01</div>
-      <h3>Додай тему</h3>
-      <p>Створи тему яку хочеш вивчити та встанови пріоритет — від P1 (критично) до P5 (колись).</p>
+      <h3 data-i18n="hiw.s1.title">Додай тему</h3>
+      <p data-i18n="hiw.s1.desc">Створи тему яку хочеш вивчити та встанови пріоритет — від P1 (критично) до P5 (колись).</p>
       <div class="hiw-example">
         <span class="hl-g">P1</span> React Hooks<br/>
         <span class="hl-b">P2</span> Docker Compose<br/>
@@ -185,8 +185,8 @@
     </div>
     <div class="hiw-step reveal" style="transition-delay:0.15s">
       <div class="hiw-num">step 02</div>
-      <h3>Фіксуй що зробив</h3>
-      <p>Щодня записуй прогрес по темі — що вивчив, написав, розібрав. Повна хронологія як git log.</p>
+      <h3 data-i18n="hiw.s2.title">Фіксуй що зробив</h3>
+      <p data-i18n="hiw.s2.desc">Щодня записуй прогрес по темі — що вивчив, написав, розібрав. Повна хронологія як git log.</p>
       <div class="hiw-example">
         <span class="hl-b">2024-01-15</span> <span class="hl-g">React Hooks</span><br/>
         Вивчив useState, useEffect.<br/>
@@ -197,93 +197,93 @@
     </div>
     <div class="hiw-step reveal" style="transition-delay:0.25s">
       <div class="hiw-num">step 03</div>
-      <h3>Не переривай серію</h3>
-      <p>Кожен день з активністю збільшує твій streak. Dashboard показує поточну серію і рекорд.</p>
+      <h3 data-i18n="hiw.s3.title">Не переривай серію</h3>
+      <p data-i18n="hiw.s3.desc">Кожен день з активністю збільшує твій streak. Dashboard показує поточну серію і рекорд.</p>
       <div class="hiw-example" style="text-align:center;padding:1.2rem">
         <span class="hl-w" style="font-size:2rem;display:block">🔥 14</span>
-        <span>// поточний streak</span><br/>
-        <span class="hl-g">рекорд: 21 день</span>
+        <span data-i18n="hiw.s3.comment">// поточний streak</span><br/>
+        <span class="hl-g" data-i18n="hiw.s3.record">рекорд: 21 день</span>
       </div>
     </div>
   </div>
 </section>
 
 <section class="features">
-  <div class="section-label reveal">// можливості</div>
-  <h2 class="section-title reveal" style="transition-delay:0.1s">Все що потрібно для росту</h2>
+  <div class="section-label reveal" data-i18n="feat.label">// можливості</div>
+  <h2 class="section-title reveal" style="transition-delay:0.1s" data-i18n="feat.title">Все що потрібно для росту</h2>
   <div class="features-grid">
     <div class="feature-card reveal" style="transition-delay:0.05s">
       <span class="feature-icon">01 // topics</span>
-      <h3>Трекер тем</h3>
-      <p>Організуй все що хочеш вивчити в одному місці. Від ідеї до завершення.</p>
+      <h3 data-i18n="feat.01.title">Трекер тем</h3>
+      <p data-i18n="feat.01.desc">Організуй все що хочеш вивчити в одному місці. Від ідеї до завершення.</p>
       <ul class="feature-list">
-        <li>Пріоритети P1–P5 (від критичного до "колись")</li>
-        <li>Статуси: не почато → в процесі → завершено</li>
-        <li>Фільтрація по статусу</li>
-        <li>Редагування і видалення тем</li>
+        <li data-i18n="feat.01.li1">Пріоритети P1–P5 (від критичного до "колись")</li>
+        <li data-i18n="feat.01.li2">Статуси: не почато → в процесі → завершено</li>
+        <li data-i18n="feat.01.li3">Фільтрація по статусу</li>
+        <li data-i18n="feat.01.li4">Редагування і видалення тем</li>
       </ul>
     </div>
     <div class="feature-card reveal" style="transition-delay:0.15s">
       <span class="feature-icon">02 // progress</span>
-      <h3>Журнал прогресу</h3>
-      <p>По кожній темі — хронологічний лог того що ти зробив. Як git commits, але для навчання.</p>
+      <h3 data-i18n="feat.02.title">Журнал прогресу</h3>
+      <p data-i18n="feat.02.desc">По кожній темі — хронологічний лог того що ти зробив. Як git commits, але для навчання.</p>
       <ul class="feature-list">
-        <li>Нотатки прив'язані до конкретної теми</li>
-        <li>Автоматична дата запису</li>
-        <li>Повна хронологія по кожній темі</li>
-        <li>Будь-який текст: посилання, нотатки, висновки</li>
+        <li data-i18n="feat.02.li1">Нотатки прив'язані до конкретної теми</li>
+        <li data-i18n="feat.02.li2">Автоматична дата запису</li>
+        <li data-i18n="feat.02.li3">Повна хронологія по кожній темі</li>
+        <li data-i18n="feat.02.li4">Будь-який текст: посилання, нотатки, висновки</li>
       </ul>
     </div>
     <div class="feature-card reveal" style="transition-delay:0.25s">
       <span class="feature-icon">03 // streak</span>
-      <h3>Streak система</h3>
-      <p>Мотивуй себе через консистентність. Кожен запис прогресу — день в серії.</p>
+      <h3 data-i18n="feat.03.title">Streak система</h3>
+      <p data-i18n="feat.03.desc">Мотивуй себе через консистентність. Кожен запис прогресу — день в серії.</p>
       <ul class="feature-list">
-        <li>Поточний streak у реальному часі</li>
-        <li>Рекордна серія за весь час</li>
-        <li>Автоматичний скид якщо день пропущено</li>
-        <li>Відображення на головній сторінці</li>
+        <li data-i18n="feat.03.li1">Поточний streak у реальному часі</li>
+        <li data-i18n="feat.03.li2">Рекордна серія за весь час</li>
+        <li data-i18n="feat.03.li3">Автоматичний скид якщо день пропущено</li>
+        <li data-i18n="feat.03.li4">Відображення на головній сторінці</li>
       </ul>
     </div>
     <div class="feature-card reveal" style="transition-delay:0.35s">
       <span class="feature-icon">04 // stats</span>
-      <h3>Статистика</h3>
-      <p>Повна картина твого прогресу: скільки зроблено, де найбільше активності, як росте streak.</p>
+      <h3 data-i18n="feat.04.title">Статистика</h3>
+      <p data-i18n="feat.04.desc">Повна картина твого прогресу: скільки зроблено, де найбільше активності, як росте streak.</p>
       <ul class="feature-list">
-        <li>Розподіл тем за статусом (графік)</li>
-        <li>Розподіл за пріоритетами</li>
-        <li>Найактивніша тема</li>
-        <li>Загальна кількість записів прогресу</li>
+        <li data-i18n="feat.04.li1">Розподіл тем за статусом (графік)</li>
+        <li data-i18n="feat.04.li2">Розподіл за пріоритетами</li>
+        <li data-i18n="feat.04.li3">Найактивніша тема</li>
+        <li data-i18n="feat.04.li4">Загальна кількість записів прогресу</li>
       </ul>
     </div>
     <div class="feature-card reveal" style="transition-delay:0.45s">
       <span class="feature-icon">05 // dashboard</span>
-      <h3>Dashboard</h3>
-      <p>Головна сторінка — швидкий огляд усього що відбувається. Один екран замість п'яти.</p>
+      <h3 data-i18n="feat.05.title">Dashboard</h3>
+      <p data-i18n="feat.05.desc">Головна сторінка — швидкий огляд усього що відбувається. Один екран замість п'яти.</p>
       <ul class="feature-list">
-        <li>Всі ключові цифри одразу</li>
-        <li>Останні додані теми</li>
-        <li>Швидке додавання нової теми</li>
-        <li>Поточний і рекордний streak</li>
+        <li data-i18n="feat.05.li1">Всі ключові цифри одразу</li>
+        <li data-i18n="feat.05.li2">Останні додані теми</li>
+        <li data-i18n="feat.05.li3">Швидке додавання нової теми</li>
+        <li data-i18n="feat.05.li4">Поточний і рекордний streak</li>
       </ul>
     </div>
     <div class="feature-card reveal" style="transition-delay:0.55s">
       <span class="feature-icon">06 // auth</span>
-      <h3>Авторизація</h3>
-      <p>Твої дані — тільки твої. Кожен користувач бачить лише свої теми і прогрес.</p>
+      <h3 data-i18n="feat.06.title">Авторизація</h3>
+      <p data-i18n="feat.06.desc">Твої дані — тільки твої. Кожен користувач бачить лише свої теми і прогрес.</p>
       <ul class="feature-list">
-        <li>Реєстрація та логін через email</li>
-        <li>JWT-токени для захисту API</li>
-        <li>Ізольовані дані кожного юзера</li>
-        <li>Автоматичний редирект якщо не авторизований</li>
+        <li data-i18n="feat.06.li1">Реєстрація та логін через email</li>
+        <li data-i18n="feat.06.li2">JWT-токени для захисту API</li>
+        <li data-i18n="feat.06.li3">Ізольовані дані кожного юзера</li>
+        <li data-i18n="feat.06.li4">Автоматичний редирект якщо не авторизований</li>
       </ul>
     </div>
   </div>
 </section>
 
 <section class="preview reveal">
-  <div class="section-label" style="margin-bottom:0.5rem;">// під капотом — REST API на Flask</div>
-  <p style="font-family:'JetBrains Mono',monospace;font-size:0.75rem;color:var(--muted);margin-bottom:1.5rem;">JWT авторизація · усі дані через JSON · готовий до інтеграції</p>
+  <div class="section-label" style="margin-bottom:0.5rem;" data-i18n="term.label">// під капотом — REST API на Flask</div>
+  <p style="font-family:'JetBrains Mono',monospace;font-size:0.75rem;color:var(--muted);margin-bottom:1.5rem;" data-i18n="term.desc">JWT авторизація · усі дані через JSON · готовий до інтеграції</p>
   <div class="terminal">
     <div class="terminal-bar">
       <span class="dot dot-r"></span><span class="dot dot-y"></span><span class="dot dot-g"></span>
@@ -311,9 +311,9 @@
 </section>
 
 <section class="cta-bottom reveal">
-  <h2>Готовий почати?</h2>
-  <p>Зареєструйся і почни відстежувати своє навчання вже сьогодні.</p>
-  <button class="btn btn-primary btn-lg" onclick="openModal('register')">Створити акаунт</button>
+  <h2 data-i18n="cta.title">Готовий почати?</h2>
+  <p data-i18n="cta.desc">Зареєструйся і почни відстежувати своє навчання вже сьогодні.</p>
+  <button class="btn btn-primary btn-lg" onclick="openModal('register')" data-i18n="cta.btn">Створити акаунт</button>
 </section>
 
 <footer class="site-footer">

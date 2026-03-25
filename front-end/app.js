@@ -102,6 +102,74 @@ const TRANSLATIONS = {
     'topics.notfound':     '// тем не знайдено',
     'most.active.empty':   '// записів прогресу ще немає',
     'most.active.entries': 'записів',
+    // Landing page
+    'hero.badge':        '// відстежуй свій шлях розробника',
+    'hero.h1.line1':     'Відстежуй своє',
+    'hero.h1.span':      'навчання',
+    'hero.desc':         'Ведіть щоденник навчання як розробник. Додавайте теми з пріоритетами, щодня фіксуйте що вивчили, підтримуйте streak і дивіться статистику свого зростання.',
+    'hero.cta.start':    'Почати безкоштовно',
+    'hero.cta.login':    'Увійти',
+    'sbar.topics.name':  'Теми',
+    'sbar.topics.lbl':   'пріоритети P1–P5',
+    'sbar.prog.name':    'Прогрес',
+    'sbar.prog.lbl':     'журнал по кожній темі',
+    'sbar.streak.name':  'Streak',
+    'sbar.streak.lbl':   'серія активних днів',
+    'sbar.stats.name':   'Статистика',
+    'sbar.stats.lbl':    'графіки і показники',
+    'hiw.label':         '// як це працює',
+    'hiw.title':         'Три кроки до прогресу',
+    'hiw.s1.title':      'Додай тему',
+    'hiw.s1.desc':       'Створи тему яку хочеш вивчити та встанови пріоритет — від P1 (критично) до P5 (колись).',
+    'hiw.s2.title':      'Фіксуй що зробив',
+    'hiw.s2.desc':       'Щодня записуй прогрес по темі — що вивчив, написав, розібрав. Повна хронологія як git log.',
+    'hiw.s3.title':      'Не переривай серію',
+    'hiw.s3.desc':       'Кожен день з активністю збільшує твій streak. Dashboard показує поточну серію і рекорд.',
+    'hiw.s3.comment':    '// поточний streak',
+    'hiw.s3.record':     'рекорд: 21 день',
+    'feat.label':        '// можливості',
+    'feat.title':        'Все що потрібно для росту',
+    'feat.01.title':     'Трекер тем',
+    'feat.01.desc':      'Організуй все що хочеш вивчити в одному місці. Від ідеї до завершення.',
+    'feat.01.li1':       'Пріоритети P1–P5 (від критичного до "колись")',
+    'feat.01.li2':       'Статуси: не почато → в процесі → завершено',
+    'feat.01.li3':       'Фільтрація по статусу',
+    'feat.01.li4':       'Редагування і видалення тем',
+    'feat.02.title':     'Журнал прогресу',
+    'feat.02.desc':      'По кожній темі — хронологічний лог того що ти зробив. Як git commits, але для навчання.',
+    'feat.02.li1':       "Нотатки прив'язані до конкретної теми",
+    'feat.02.li2':       'Автоматична дата запису',
+    'feat.02.li3':       'Повна хронологія по кожній темі',
+    'feat.02.li4':       'Будь-який текст: посилання, нотатки, висновки',
+    'feat.03.title':     'Streak система',
+    'feat.03.desc':      'Мотивуй себе через консистентність. Кожен запис прогресу — день в серії.',
+    'feat.03.li1':       'Поточний streak у реальному часі',
+    'feat.03.li2':       'Рекордна серія за весь час',
+    'feat.03.li3':       'Автоматичний скид якщо день пропущено',
+    'feat.03.li4':       'Відображення на головній сторінці',
+    'feat.04.title':     'Статистика',
+    'feat.04.desc':      'Повна картина твого прогресу: скільки зроблено, де найбільше активності, як росте streak.',
+    'feat.04.li1':       'Розподіл тем за статусом (графік)',
+    'feat.04.li2':       'Розподіл за пріоритетами',
+    'feat.04.li3':       'Найактивніша тема',
+    'feat.04.li4':       'Загальна кількість записів прогресу',
+    'feat.05.title':     'Dashboard',
+    'feat.05.desc':      "Головна сторінка — швидкий огляд усього що відбувається. Один екран замість п'яти.",
+    'feat.05.li1':       'Всі ключові цифри одразу',
+    'feat.05.li2':       'Останні додані теми',
+    'feat.05.li3':       'Швидке додавання нової теми',
+    'feat.05.li4':       'Поточний і рекордний streak',
+    'feat.06.title':     'Авторизація',
+    'feat.06.desc':      'Твої дані — тільки твої. Кожен користувач бачить лише свої теми і прогрес.',
+    'feat.06.li1':       'Реєстрація та логін через email',
+    'feat.06.li2':       'JWT-токени для захисту API',
+    'feat.06.li3':       'Ізольовані дані кожного юзера',
+    'feat.06.li4':       'Автоматичний редирект якщо не авторизований',
+    'term.label':        '// під капотом — REST API на Flask',
+    'term.desc':         'JWT авторизація · усі дані через JSON · готовий до інтеграції',
+    'cta.title':         'Готовий почати?',
+    'cta.desc':          'Зареєструйся і почни відстежувати своє навчання вже сьогодні.',
+    'cta.btn':           'Створити акаунт',
   },
   en: {
     'nav.topics':          '// topics',
@@ -201,6 +269,74 @@ const TRANSLATIONS = {
     'topics.notfound':     '// no topics found',
     'most.active.empty':   '// no progress entries yet',
     'most.active.entries': 'entries',
+    // Landing page
+    'hero.badge':        '// track your dev journey',
+    'hero.h1.line1':     'Track your',
+    'hero.h1.span':      'learning',
+    'hero.desc':         'Keep a learning journal like a developer. Add topics with priorities, log what you learned daily, maintain a streak and view your growth statistics.',
+    'hero.cta.start':    'Start for free',
+    'hero.cta.login':    'Log in',
+    'sbar.topics.name':  'Topics',
+    'sbar.topics.lbl':   'priorities P1–P5',
+    'sbar.prog.name':    'Progress',
+    'sbar.prog.lbl':     'log for each topic',
+    'sbar.streak.name':  'Streak',
+    'sbar.streak.lbl':   'streak of active days',
+    'sbar.stats.name':   'Statistics',
+    'sbar.stats.lbl':    'charts and metrics',
+    'hiw.label':         '// how it works',
+    'hiw.title':         'Three steps to progress',
+    'hiw.s1.title':      'Add a topic',
+    'hiw.s1.desc':       'Create a topic you want to learn and set a priority — from P1 (critical) to P5 (someday).',
+    'hiw.s2.title':      'Log what you did',
+    'hiw.s2.desc':       'Log your daily progress — what you learned, wrote, figured out. Full history like git log.',
+    'hiw.s3.title':      'Keep your streak',
+    'hiw.s3.desc':       'Each day with activity grows your streak. Dashboard shows current streak and record.',
+    'hiw.s3.comment':    '// current streak',
+    'hiw.s3.record':     'record: 21 days',
+    'feat.label':        '// features',
+    'feat.title':        'Everything you need to grow',
+    'feat.01.title':     'Topic tracker',
+    'feat.01.desc':      'Organize everything you want to learn in one place. From idea to completion.',
+    'feat.01.li1':       'Priorities P1–P5 (from critical to "someday")',
+    'feat.01.li2':       'Statuses: not started → in progress → completed',
+    'feat.01.li3':       'Filter by status',
+    'feat.01.li4':       'Edit and delete topics',
+    'feat.02.title':     'Progress journal',
+    'feat.02.desc':      'For each topic — a chronological log of what you did. Like git commits, but for learning.',
+    'feat.02.li1':       'Notes linked to a specific topic',
+    'feat.02.li2':       'Automatic entry date',
+    'feat.02.li3':       'Full chronology for each topic',
+    'feat.02.li4':       'Any text: links, notes, conclusions',
+    'feat.03.title':     'Streak system',
+    'feat.03.desc':      'Motivate yourself through consistency. Each progress entry — a day in the streak.',
+    'feat.03.li1':       'Current streak in real time',
+    'feat.03.li2':       'Record streak of all time',
+    'feat.03.li3':       'Auto-reset if a day is missed',
+    'feat.03.li4':       'Displayed on the main page',
+    'feat.04.title':     'Statistics',
+    'feat.04.desc':      'Full picture of your progress: how much done, where most activity, how streak grows.',
+    'feat.04.li1':       'Topic distribution by status (chart)',
+    'feat.04.li2':       'Distribution by priority',
+    'feat.04.li3':       'Most active topic',
+    'feat.04.li4':       'Total number of progress entries',
+    'feat.05.title':     'Dashboard',
+    'feat.05.desc':      'Main page — quick overview of everything happening. One screen instead of five.',
+    'feat.05.li1':       'All key figures at once',
+    'feat.05.li2':       'Recently added topics',
+    'feat.05.li3':       'Quick add new topic',
+    'feat.05.li4':       'Current and record streak',
+    'feat.06.title':     'Authorization',
+    'feat.06.desc':      'Your data is yours only. Each user sees only their own topics and progress.',
+    'feat.06.li1':       'Register and login via email',
+    'feat.06.li2':       'JWT tokens for API protection',
+    'feat.06.li3':       'Isolated data for each user',
+    'feat.06.li4':       'Automatic redirect if not authorized',
+    'term.label':        '// under the hood — REST API on Flask',
+    'term.desc':         'JWT auth · all data via JSON · ready for integration',
+    'cta.title':         'Ready to start?',
+    'cta.desc':          'Register and start tracking your learning today.',
+    'cta.btn':           'Create account',
   }
 };
 
@@ -232,8 +368,8 @@ function applyLang() {
 function switchLang() {
   setLang(getLang() === 'uk' ? 'en' : 'uk');
   applyLang();
-  // Re-render dynamic content if on relevant pages
   if (isTopics && allTopics.length) renderTopics();
+  if (isDashboard && dashboardTopics.length) renderDashboardTopics(dashboardTopics);
 }
 
 function toggleMobileMenu() {
@@ -313,10 +449,9 @@ function statusLabel(s) {
 // ── Page detection ──
 const currentPage = window.location.pathname.split('/').pop() || 'index.html';
 const isIndex     = currentPage === 'index.html' || currentPage === '';
-const isDashboard = currentPage === 'dashboard.html';
-const isTopics    = currentPage === 'topics.html';
-const isStats     = currentPage === 'stats.html';
-
+const isTopics    = currentPage === 'topics.html' || currentPage === 'topics';
+const isDashboard = currentPage === 'dashboard.html' || currentPage === 'dashboard';
+const isStats     = currentPage === 'stats.html' || currentPage === 'stats';
 // Apply language translations on every page load
 applyLang();
 
@@ -503,24 +638,37 @@ if (isDashboard && getToken()) {
   })();
 }
 
+let dashboardTopics = [];
+
 async function loadDashboardTopics() {
+  try {
+    const res = await fetch(API + '/lot', { headers: authHeaders() });
+    if (!res.ok) { renderDashboardTopics(null); return; }
+    dashboardTopics = await res.json();
+    renderDashboardTopics(dashboardTopics);
+  } catch {
+    renderDashboardTopics(null);
+  }
+}
+
+function renderDashboardTopics(topics) {
   const list = document.getElementById('topics-list');
   if (!list) return;
-  try {
-    const res    = await fetch(API + '/lot', { headers: authHeaders() });
-    if (!res.ok) { list.innerHTML = `<div class="data-row-empty">${t('topics.err.load')}</div>`; return; }
-    const topics = await res.json();
-    if (!topics.length) { list.innerHTML = `<div class="data-row-empty">${t('topics.empty')}</div>`; return; }
-    const last5  = topics.slice(-5).reverse();
-    list.innerHTML = last5.map(tp => `
-      <div class="data-row">
-        <span class="badge badge-p${tp.priority}">P${tp.priority}</span>
-        <span class="data-title">${escHtml(tp.title)}</span>
-        <span class="badge badge-status badge-${tp.status}">${statusLabel(tp.status)}</span>
-      </div>`).join('');
-  } catch {
+  if (!topics) {
     list.innerHTML = `<div class="data-row-empty">${t('topics.err.load')}</div>`;
+    return;
   }
+  if (!topics.length) {
+    list.innerHTML = `<div class="data-row-empty">${t('topics.empty')}</div>`;
+    return;
+  }
+  const last5 = topics.slice(-5).reverse();
+  list.innerHTML = last5.map(tp => `
+    <div class="data-row">
+      <span class="badge badge-p${tp.priority}">P${tp.priority}</span>
+      <span class="data-title">${escHtml(tp.title)}</span>
+      <span class="badge badge-status badge-${tp.status}">${statusLabel(tp.status)}</span>
+    </div>`).join('');
 }
 
 // ══════════════════════════════════════════════════════
