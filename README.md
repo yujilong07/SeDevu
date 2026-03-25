@@ -1,4 +1,4 @@
-# DevTracker
+# SeDevu - DevTracker
 
 > A personal learning tracker for developers — track topics, log progress, maintain streaks, and visualize your growth.
 
@@ -9,7 +9,7 @@
 
 ## Overview
 
-DevTracker is a full-stack web application designed to help developers stay consistent and organized in their learning journey. Inspired by GitHub's contribution graph, it provides a streak system to encourage daily activity, a topic tracker to manage learning goals, and a statistics dashboard to visualize progress over time.
+SeDevu is a full-stack web application designed to help developers stay consistent and organized in their learning journey. Inspired by GitHub's contribution graph, it provides a streak system to encourage daily activity, a topic tracker to manage learning goals, and a statistics dashboard to visualize progress over time.
 
 ---
 
@@ -173,8 +173,8 @@ JWT_PASS=your-jwt-secret
 
 ## Deployment
 
-- **Backend** deployed on [Railway](https://railway.app) with automatic deploys from the `master` branch
-- **Frontend** deployed on [Netlify](https://netlify.com) via manual deploy
+- **Backend** deployed on [Railway](https://railway.app) 
+- **Frontend** deployed on [Netlify](https://netlify.com) 
 - Database migrations run automatically as a pre-deploy step on Railway
 
 ---
